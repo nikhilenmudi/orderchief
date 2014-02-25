@@ -53,5 +53,7 @@
 
 		<!-- Map all of our Hibernate-managed entity classes -->
 		<mapping class="com.orderchief.domain.Product" />
+		<mapping class="com.orderchief.domain.ProductOption" />
+		<mapping class="com.orderchief.domain.ProductSubOption" />
 	</session-factory>
 </hibernate-configuration>

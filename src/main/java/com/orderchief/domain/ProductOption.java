@@ -1,29 +1,38 @@
 package com.orderchief.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Embeddable;
+
+import java.math.BigDecimal;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Embeddable
-public class ProductOption {
-
+@Entity
+@Table(name="ProductOption")
+public class ProductOption{
 	
+	
+	
+	@Id
+	@Column(name="product_option_id")
+	@GeneratedValue
+	protected int productOptionId;
+	
+	
+
+	@ManyToOne()
+	protected Product product;		
+	
+	@Column(name="ProductTopping")
 	private String topping;
 			
+	@Column(name="price")
+	protected BigDecimal baseprice;
 			
-			
-	
-	
-	public String getTopping() {
-		return topping;
-	}
-
-	public void setTopping(String topping) {
-		this.topping = topping;
-	}
 
 	public int getProductOptionId() {
 		return productOptionId;
@@ -33,8 +42,34 @@ public class ProductOption {
 		this.productOptionId = productOptionId;
 	}
 
-	@Id
-	private int productOptionId;
+	public BigDecimal getBaseprice() {
+		return baseprice;
+	}
+
+	public void setBaseprice(BigDecimal baseprice) {
+		this.baseprice = baseprice;
+	}
+	
+	
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	
+	public String getTopping() {
+		return topping;
+	}
+
+	public void setTopping(String topping) {
+		this.topping = topping;
+	}
+
+	
+	
 	
 
 	

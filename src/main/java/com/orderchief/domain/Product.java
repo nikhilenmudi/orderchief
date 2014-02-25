@@ -1,59 +1,92 @@
 package com.orderchief.domain;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Product")
 public class Product {
 	@Id
-	private int productId;
-	private String name;
+	@Column(name="productId")
+	@GeneratedValue
+	protected int productId;
+	@Column(name="Product_Name")
+	protected String name;
 	
-	@ElementCollection
-	private Set<ProductOption> option = new HashSet<>();
+	@Column(name="price")
+	protected BigDecimal baseprice;
 	
-	@ElementCollection
-	private Set<ProductSubOption> productSubOption = new HashSet<>();
 	
-
+	@OneToMany(cascade = javax.persistence.CascadeType.ALL,mappedBy="product")
+	protected List<ProductOption> productoption = new ArrayList<ProductOption>();
 	
-
+	@OneToMany(cascade = javax.persistence.CascadeType.ALL,mappedBy="product")
+	protected List<ProductSubOption> productSubOption = new ArrayList<ProductSubOption>();
 	
-
 	
-
-
-	public Set<ProductOption> getOption() {
-		return option;
+	
+	public List<String> getProductOptionsAsListOfStrings(){
+		List<String> productoptions = new ArrayList<String>();
+		for(ProductOption poption : this.productoption){
+			productoptions.add(poption.getTopping());
+		}
+		return productoptions;
+	}
+	
+	public List<String> getProductSubOptionsAsListOfStrings(){
+		List<String> productsuboptions = new ArrayList<String>();
+		for(ProductSubOption psoption : this.productSubOption){
+			productsuboptions.add(psoption.getSize());
+		}
+		return productsuboptions;
+	}
+	
+	public BigDecimal getProductTotalPrice(){
+		BigDecimal prod_total = this.baseprice;
+		for(ProductOption productoption : this.productoption){
+			prod_total = prod_total.add(productoption.baseprice); 
+		}
+		for(ProductSubOption productsuboption : this.productSubOption){
+			prod_total = prod_total.add(productsuboption.baseprice); 
+		}
+		return prod_total;
+	}
+	
+	public BigDecimal getBaseprice() {
+		return baseprice;
 	}
 
-
-	public void setOption(Set<ProductOption> option) {
-		this.option = option;
+	public void setBaseprice(BigDecimal baseprice) {
+		this.baseprice = baseprice;
 	}
 
-
-	public Set<ProductSubOption> getProductSubOption() {
+	public List<ProductSubOption> getProductSubOption() {
 		return productSubOption;
 	}
 
-
-	public void setProductSubOption(Set<ProductSubOption> productSubOption) {
+	public void setProductSubOption(List<ProductSubOption> productSubOption) {
 		this.productSubOption = productSubOption;
 	}
 
+	public List<ProductOption> getProductoption() {
+		return productoption;
+	}
+
+	public void setProductoption(List<ProductOption> productoption) {
+		this.productoption = productoption;
+	}
 
 	public int getProductId() {
 		return productId;
 	}
-
 	
 	public void setProductId(int productId) {
 		this.productId = productId;
