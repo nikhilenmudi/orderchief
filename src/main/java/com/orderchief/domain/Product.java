@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,7 +33,12 @@ public class Product {
 	@OneToMany(cascade = javax.persistence.CascadeType.ALL,mappedBy="product")
 	protected List<ProductSubOption> productSubOption = new ArrayList<ProductSubOption>();
 	
+//	@ManyToOne
+//	protected Order order;
 	
+	@ManyToOne
+	@JoinColumn(name="ofVendor")
+	protected Vendor vendor;
 	
 	public List<String> getProductOptionsAsListOfStrings(){
 		List<String> productoptions = new ArrayList<String>();
@@ -60,6 +67,22 @@ public class Product {
 		return prod_total;
 	}
 	
+//	public Order getOrder() {
+//		return order;
+//	}
+//
+//	public void setOrder(Order order) {
+//		this.order = order;
+//	}
+
+	public Vendor getVendor() {
+		return vendor;
+	}
+
+	public void setVendor(Vendor vendor) {
+		this.vendor = vendor;
+	}
+
 	public BigDecimal getBaseprice() {
 		return baseprice;
 	}

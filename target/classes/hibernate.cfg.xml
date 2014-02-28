@@ -55,5 +55,7 @@
 		<mapping class="com.orderchief.domain.Product" />
 		<mapping class="com.orderchief.domain.ProductOption" />
 		<mapping class="com.orderchief.domain.ProductSubOption" />
+		<mapping class="com.orderchief.domain.Order" />
+		<mapping class="com.orderchief.domain.Vendor" />
 	</session-factory>
 </hibernate-configuration>
