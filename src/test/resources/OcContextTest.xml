@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<import resource="dbTest-context.xml" />
+
+	<context:component-scan base-package="com.orderchief" />
+    
+    <!-- Specifies that DB Transactions are driven by annotations.  To use this, put @Transactional above each of your service layer
+        interface methods (Proper service layer design dictates each method represents a single transaction within your application) -->
+    <tx:annotation-driven />
+	
+</beans>

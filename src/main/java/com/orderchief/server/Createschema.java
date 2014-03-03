@@ -1,5 +1,6 @@
 package com.orderchief.server;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+
 
 
 
@@ -43,39 +45,46 @@ public class Createschema {
 		//create product coffee
 		Product product = new Product();
 		product.setName("Coffee");
+		product.setBaseprice(BigDecimal.valueOf(2.0));
 		//create product burger
 		Product product1 = new Product();
 		product1.setName("Burger");
-		
+		product1.setBaseprice(BigDecimal.valueOf(2.0));
 		//create productoptions
 		ProductOption po2 = new ProductOption();
 		po2.setTopping("barbeque");
+		po2.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductOption po = new ProductOption();
 		po.setTopping("whipcream");
+		po.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductOption po1 = new ProductOption();
 		po1.setTopping("honeymustard");
+		po1.setBaseprice(BigDecimal.valueOf(0.3));
+		
 		
 		ProductOption po11 = new ProductOption();
-		po1.setTopping("honeymustard");
-		
+		po11.setTopping("mayo");
+		po11.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductOption po22 = new ProductOption();
-		po1.setTopping("honeymustard");
+		po22.setTopping("onion");
+		po22.setBaseprice(BigDecimal.valueOf(0.5));
 		//create productsuboptions
 		ProductSubOption ps1 = new ProductSubOption();
 		ps1.setSize("Small");
+		ps1.setBaseprice(BigDecimal.valueOf(0.5));
 		
 		ProductSubOption ps11 = new ProductSubOption();
 		ps11.setSize("Small");
-		
+		ps11.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductSubOption ps2 = new ProductSubOption();
 		ps2.setSize("Medium");
-		
+		ps2.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductSubOption ps22 = new ProductSubOption();
 		ps22.setSize("Medium");
-		
+		ps22.setBaseprice(BigDecimal.valueOf(0.5));
 		ProductSubOption ps3 = new ProductSubOption();
 		ps3.setSize("Large");
-		
+		ps3.setBaseprice(BigDecimal.valueOf(0.5));
 		
 		
 		
@@ -144,8 +153,9 @@ public class Createschema {
 		System.out.println(product.getName());
 		
 		for(int i=0;i<product.getProductoption().size();i++){
-		System.out.println(product.getProductOptionsAsListOfStrings().get(i));	
-		System.out.println(product.getProductoption().get(i).getTopping());
+//		System.out.println(product.getProductOptionsAsListOfStrings().get(i));	
+//		System.out.println(product.getProductoption().get(i).getTopping());
+//		System.out.println(order1.calcOrderTotal());
 		}
 		
 	}
