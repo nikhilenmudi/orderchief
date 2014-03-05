@@ -11,6 +11,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="VENDOR")
 public class Vendor {
@@ -22,6 +25,7 @@ public class Vendor {
 	
 	@OneToMany(cascade=javax.persistence.CascadeType.ALL,mappedBy="vendor")
 	@Column(name="Product")
+	@JsonManagedReference("Product-list")
 	protected List<Product> product = new ArrayList<Product>();
 	
 	@Column(name="VENDOR_NAME")
@@ -33,6 +37,8 @@ public class Vendor {
 	@Column(name="VENDOR_LOCATION")
 	protected String vendorLocation;
 	
+	
+	@JsonIgnore
 	@OneToMany(cascade=javax.persistence.CascadeType.ALL,mappedBy="vendor")
 	@Column(name="CURRENTORDERS")
 	protected List<Order> currentorders = new ArrayList<Order>();

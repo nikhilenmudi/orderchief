@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="ProductOption")
 public class ProductOption{
@@ -23,8 +25,9 @@ public class ProductOption{
 	protected int productOptionId;
 	
 	
-
+	
 	@ManyToOne()
+	@JsonBackReference("Product-option")
 	protected Product product;		
 	
 	@Column(name="ProductTopping")

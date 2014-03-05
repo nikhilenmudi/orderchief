@@ -6,12 +6,17 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Product")
@@ -28,18 +33,20 @@ public class Product {
 	
 	
 	@OneToMany(cascade = javax.persistence.CascadeType.ALL,mappedBy="product")
+	@JsonManagedReference("Product-option")
 	protected List<ProductOption> productoption = new ArrayList<ProductOption>();
 	
 	@OneToMany(cascade = javax.persistence.CascadeType.ALL,mappedBy="product")
+	@JsonManagedReference("Product-suboption")
 	protected List<ProductSubOption> productSubOption = new ArrayList<ProductSubOption>();
 	
-//	@ManyToOne
-//	protected Order order;
 	
 	@ManyToOne
 	@JoinColumn(name="ofVendor")
+	@JsonBackReference("Product-list")
 	protected Vendor vendor;
 	
+	@JsonIgnore
 	public List<String> getProductOptionsAsListOfStrings(){
 		List<String> productoptions = new ArrayList<String>();
 		for(ProductOption poption : this.productoption){
@@ -48,6 +55,7 @@ public class Product {
 		return productoptions;
 	}
 	
+	@JsonIgnore
 	public List<String> getProductSubOptionsAsListOfStrings(){
 		List<String> productsuboptions = new ArrayList<String>();
 		for(ProductSubOption psoption : this.productSubOption){
@@ -56,6 +64,7 @@ public class Product {
 		return productsuboptions;
 	}
 	
+	@JsonIgnore
 	public BigDecimal getProductTotalPrice(){
 		BigDecimal prod_total = this.baseprice;
 		for(ProductOption productoption : this.productoption){
@@ -67,14 +76,6 @@ public class Product {
 		return prod_total;
 	}
 	
-//	public Order getOrder() {
-//		return order;
-//	}
-//
-//	public void setOrder(Order order) {
-//		this.order = order;
-//	}
-
 	public Vendor getVendor() {
 		return vendor;
 	}
