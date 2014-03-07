@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.orderchief.domain.ProductSubOption;
 import com.orderchief.domain.Vendor;
 
 
@@ -22,5 +23,10 @@ public class VendorDaoImpl implements VendorDao {
 		List<Vendor> result = em.createQuery("from "+Vendor.class.getName()).getResultList();
 		return result;
 	}
+	
+//	public ProductSubOption getPS(){
+//		ProductSubOption result1 = (ProductSubOption)em.createQuery("from "+ProductSubOption.class.getName()+" where productId=?").getSingleResult();
+//		return result1;
+//	}
 
 }
