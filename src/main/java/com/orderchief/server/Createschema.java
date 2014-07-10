@@ -140,7 +140,7 @@ public class Createschema {
 		product1.setVendor(tims);
 		
 		Order order1 = new Order();
-		order1.setProduct(productlist);
+		//order1.setProduct(productlist);
 		order1.setVendor(tims);
 		
 		

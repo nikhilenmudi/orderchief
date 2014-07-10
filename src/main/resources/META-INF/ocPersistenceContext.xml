@@ -10,5 +10,6 @@
 	<class>com.orderchief.domain.ProductSubOption</class>
 	<class>com.orderchief.domain.Vendor</class>
 	<class>com.orderchief.domain.Order</class>
+	<class>com.orderchief.util.OrderItem</class>
 	</persistence-unit>
 </persistence>

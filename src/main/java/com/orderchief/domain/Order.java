@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.orderchief.util.OrderItem;
+
 @Entity
 @Table(name="ORDERS")
 public class Order {
@@ -24,11 +26,8 @@ public class Order {
 	protected int orderid;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@Column(name="PRODUCTS")
-	protected List<Product> product = new ArrayList<Product>();
-	
-	@Column(name="PRODUCT_TOTAL")
-	protected BigDecimal producttotal;
+	@Column(name="ORDER_PRODUCTS")
+	protected List<OrderItem> product = new ArrayList<OrderItem>();
 	
 	@Column(name="STATUS")
 	protected String status;
@@ -40,15 +39,6 @@ public class Order {
 	@JoinColumn(name="OfVendor")
 	protected Vendor vendor;
 	
-	public BigDecimal calcOrderTotal()
-	{
-		BigDecimal ordertotal = null;
-		for(Product product : this.product){
-			ordertotal = ordertotal.add(product.getProductTotalPrice());
-		}
-		
-		return ordertotal;
-	}
 
 	public String getStatus() {
 		return status;
@@ -74,29 +64,24 @@ public class Order {
 		this.orderid = orderid;
 	}
 
-	public List<Product> getProduct() {
-		return product;
-	}
-
-	public void setProduct(List<Product> product) {
-		this.product = product;
-	}
-
-	public BigDecimal getProducttotal() {
-		return producttotal;
-	}
-
-	public void setProducttotal(BigDecimal producttotal) {
-		this.producttotal = producttotal;
-	}
 
 	public BigDecimal getOrdertotal() {
 		return ordertotal;
 	}
 
-	public void setOrdertotal(BigDecimal ordertotal) {
-		this.ordertotal = calcOrderTotal();
+	public List<OrderItem> getProduct() {
+		return product;
 	}
+
+	public void setProduct(List<OrderItem> product) {
+		this.product = product;
+	}
+
+	public void setOrdertotal(BigDecimal ordertotal) {
+		this.ordertotal = ordertotal;
+	}
+
+	
 
 	
 }

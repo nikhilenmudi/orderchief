@@ -22,6 +22,4 @@ public class VendorController {
 		System.out.println(vendors.size());
 		return vendors;
 	}
-	
-		
 }

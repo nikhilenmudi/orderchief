@@ -24,8 +24,9 @@ public class ProductSubOption {
 	@Column(name="product_size")
 	protected String size;
 	
-	@ManyToOne()
+	
 	@JsonBackReference("Product-suboption")
+	@ManyToOne()
 	@JoinColumn(name="productId")
 	protected Product product;
 	

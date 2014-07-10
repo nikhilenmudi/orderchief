@@ -31,7 +31,7 @@ public class Vendor {
 	@Column(name="VENDOR_NAME")
 	protected String vendorName;
 	
-	@Transient
+	@Column(name="COUNTER")
 	protected int waitingNumber;
 	
 	@Column(name="VENDOR_LOCATION")
