@@ -92,4 +92,10 @@ public class OrderServiceImpl implements OrderService {
 		this.orderDao.saveOrder(order);
 	}
 
+	@Override
+	public List<Order> getOrdersForVendor(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
