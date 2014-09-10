@@ -70,10 +70,25 @@ public class OrderController {
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 	
-	@RequestMapping("/getOrders/{vendorId}")
+	@RequestMapping(value = "/getOrders/{vendorId}", method = RequestMethod.GET)
 	public @ResponseBody List<Order> getOrders(@PathVariable int vendorId){
 		List<Order> orders = orderService.getOrdersForVendor(vendorId); 
 		System.out.println(orders.size());
 		return orders;
+	}
+	
+	@RequestMapping(value = "/getOrderItems/{orderId}", method = RequestMethod.GET)
+	public @ResponseBody List<OrderItem> getOrderItems(@PathVariable int orderId){
+		List<OrderItem> orderItems = orderService.getOrderItems(orderId); 
+		System.out.println(orderItems.size());
+		return orderItems;
+	}
+	
+	@RequestMapping(value = "/ordercomplete", method = RequestMethod.POST)
+	public void orderComplete(@RequestParam int completedOrderId, HttpServletResponse response){
+		 System.out.println("completing order"+completedOrderId);
+		 this.orderService.completeOrder(completedOrderId);
+		
+		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }

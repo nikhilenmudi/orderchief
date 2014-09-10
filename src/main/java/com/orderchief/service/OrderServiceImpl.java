@@ -99,4 +99,28 @@ public class OrderServiceImpl implements OrderService {
 		return this.orderDao.getOrderByVendorId(id);
 	}
 
+	@Transactional
+	@Override
+	public List<OrderItem> getOrderItems(int orderId) {
+		Order order = this.orderDao.findById(orderId);
+		List<OrderItem> orderItems = new ArrayList<OrderItem>();
+		orderItems = order.getProduct();
+		return orderItems;
+	}
+
+	@Transactional
+	@Override
+	public void completeOrder(int completedOrderId) {
+		//Change order status
+		Order order = this.orderDao.findById(completedOrderId);
+		order.setStatus("DONE");
+		//change vendor counter
+		Vendor vendor = order.getVendor();
+		int waitCounter = vendor.getWaitingNumber();
+		waitCounter--;
+		vendor.setWaitingNumber(waitCounter);
+		this.orderDao.saveOrder(order);
+		
+	}
+
 }

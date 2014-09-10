@@ -12,4 +12,8 @@ public interface OrderService {
 	
 	public List<Order> getOrdersForVendor(int id);
 	
+	public List<OrderItem> getOrderItems(int orderId);
+	
+	public void completeOrder(int completedOrderId);
+	
 }

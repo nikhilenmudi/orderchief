@@ -10,4 +10,5 @@ public interface OrderDAO {
 	
 	public List<Order> getOrderByVendorId(int id);
 	
+	public Order findById(int orderId);
 }
