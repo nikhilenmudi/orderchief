@@ -39,6 +39,8 @@ public class Order {
 	@JoinColumn(name="OfVendor")
 	protected Vendor vendor;
 	
+	@Column(name="userGcmKey")
+	protected String userGcmKey;
 
 	public String getStatus() {
 		return status;
@@ -79,6 +81,14 @@ public class Order {
 
 	public void setOrdertotal(BigDecimal ordertotal) {
 		this.ordertotal = ordertotal;
+	}
+
+	public String getUserGcmKey() {
+		return userGcmKey;
+	}
+
+	public void setUserGcmKey(String userGcmKey) {
+		this.userGcmKey = userGcmKey;
 	}
 
 	

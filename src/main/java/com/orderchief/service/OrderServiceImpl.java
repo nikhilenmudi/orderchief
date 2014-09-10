@@ -36,9 +36,10 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	@Transactional
-	public void saveOrder(List<OrderItem> orderList) {
+	public void saveOrder(String userGcmKey, List<OrderItem> orderList) {
 		Product product;
 		Order order = new Order();
+		order.setUserGcmKey(userGcmKey);
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		Vendor ofVendor = null;
 		BigDecimal calculateOrderTotal = BigDecimal.ZERO;
@@ -92,10 +93,10 @@ public class OrderServiceImpl implements OrderService {
 		this.orderDao.saveOrder(order);
 	}
 
+	@Transactional
 	@Override
 	public List<Order> getOrdersForVendor(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.orderDao.getOrderByVendorId(id);
 	}
 
 }
