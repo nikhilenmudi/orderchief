@@ -34,8 +34,11 @@ public class Vendor {
 	@Column(name="COUNTER")
 	protected int waitingNumber;
 	
-	@Column(name="VENDOR_LOCATION")
-	protected String vendorLocation;
+	@Column(name="VENDOR_LATITUDE")
+	protected double vendorLatitude;
+	
+	@Column(name="VENDOR_LONGITUDE")
+	protected double vendorLongitude;
 	
 	
 	@JsonIgnore
@@ -63,12 +66,7 @@ public class Vendor {
 	public void setWaitingNumber(int waitingNumber) {
 		this.waitingNumber = waitingNumber;
 	}
-	public String getVendorLocation() {
-		return vendorLocation;
-	}
-	public void setVendorLocation(String vendorLocation) {
-		this.vendorLocation = vendorLocation;
-	}
+	
 	public int getVendorId() {
 		return vendorId;
 	}
@@ -80,6 +78,18 @@ public class Vendor {
 	}
 	public void setProduct(List<Product> product) {
 		this.product = product;
+	}
+	public double getVendorLatitude() {
+		return vendorLatitude;
+	}
+	public void setVendorLatitude(double vendorLatitude) {
+		this.vendorLatitude = vendorLatitude;
+	}
+	public double getVendorLongitude() {
+		return vendorLongitude;
+	}
+	public void setVendorLongitude(double vendorLongitude) {
+		this.vendorLongitude = vendorLongitude;
 	}
 	
 	
