@@ -1,6 +1,10 @@
 package com.orderchief.service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+
 
 
 
@@ -21,6 +25,18 @@ public class VendorServiceImpl implements VendorService {
 	@Override
 	public List<Vendor> getListOfVendors() {
 		List<Vendor> vendors = vendorDao.getListOfVendors();
+		return vendors;
+	}
+
+	@Transactional
+	@Override
+	public List<Vendor> getVendorsListByLocation(double latitude,
+			double longitude) {
+		List<Vendor> vendors = this.vendorDao.getListByLocation(latitude, longitude);
+		for(Vendor vendor : vendors){
+		System.out.println("The distance is "+ vendor.getDistance());
+		}
+
 		return vendors;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -19,9 +20,10 @@ public class VendorController {
 	@Autowired
 	private VendorService vendorService;
 
-	@RequestMapping("/getVendors")
-	public @ResponseBody List<Vendor> getVendors(){
-		List<Vendor> vendors = vendorService.getListOfVendors(); 
+	@RequestMapping("/getVendors/{lat}/{lng}")
+	public @ResponseBody List<Vendor> getVendors(@PathVariable double lat,@PathVariable double lng){
+		System.out.println("Current position is "+lat+" and"+lng);
+		List<Vendor> vendors = vendorService.getVendorsListByLocation(lat, lng); 
 		System.out.println(vendors.size());
 		return vendors;
 	}

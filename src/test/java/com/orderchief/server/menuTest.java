@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.orderchief.dao.MenuDao;
 import com.orderchief.domain.Product;
+import com.orderchief.domain.Vendor;
+import com.orderchief.service.VendorService;
 
 
 @ContextConfiguration(locations = { "/OcContextTest.xml" })
@@ -21,6 +23,9 @@ public class menuTest {
 	@Autowired
 	private MenuDao md;
 	
+	@Autowired
+	private VendorService vs;
+	
 	@Test
 	public void testGetMenuForVendor() {
 		List<Product> menu = md.getMenuForVendor(1);
@@ -29,6 +34,11 @@ public class menuTest {
 		for(Product product : menu){
 			System.out.println(product.getName());
 		}
+	}
+	@Test
+	public void testVendors(){
+		List<Vendor> vv = this.vs.getVendorsListByLocation(45.66, -75.222);
+		System.out.print("test over");
 	}
 
 }

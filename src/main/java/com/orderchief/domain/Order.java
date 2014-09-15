@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import com.orderchief.util.OrderItem;
 
 @Entity
-@Table(name="ORDERS")
+@Table(name="orders")
 public class Order {
 	
 	@Id

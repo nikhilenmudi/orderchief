@@ -16,11 +16,18 @@
         <property name="entityManagerFactory" ref="ocEntityManagerFactory" />
     </bean>
 	
+<!-- 	<bean id="ocDataSource" class="org.apache.commons.dbcp.BasicDataSource"> -->
+<!--         <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!--         <property name="url" value="jdbc:mysql://localhost:3306/orderchief" /> -->
+<!--         <property name="username" value="root" /> -->
+<!--         <property name="password" value="password" /> -->
+<!--     </bean> -->
+	
 	<bean id="ocDataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/orderchief" />
-        <property name="username" value="root" />
-        <property name="password" value="password" />
+        <property name="url" value="jdbc:mysql://127.2.208.2:3306/orderchiefcloud" />
+        <property name="username" value="adminUEjRl4C" />
+        <property name="password" value="vDwDQDr7DYg6" />
     </bean>
 	
 	<bean id="ocEntityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">

@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="VENDOR")
+@Table(name="vendor")
 public class Vendor {
 	
 	@Id
@@ -40,6 +44,11 @@ public class Vendor {
 	@Column(name="VENDOR_LONGITUDE")
 	protected double vendorLongitude;
 	
+	@Transient
+	protected double distance;
+	
+	@Column(name="LOGO")
+	protected String logo;
 	
 	@JsonIgnore
 	@OneToMany(cascade=javax.persistence.CascadeType.ALL,mappedBy="vendor")
@@ -90,6 +99,19 @@ public class Vendor {
 	}
 	public void setVendorLongitude(double vendorLongitude) {
 		this.vendorLongitude = vendorLongitude;
+	}
+	
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	
 	
