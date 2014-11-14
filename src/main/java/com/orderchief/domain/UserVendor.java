@@ -21,15 +21,17 @@ public class UserVendor {
     private String login;
      
     private String password;
+    
+    private int vendorId;
      
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinTable(name="USER_ROLES",
-        joinColumns = 
-        @JoinColumn(name="USER_ID", referencedColumnName="ID"),
-        inverseJoinColumns=
-          @JoinColumn(name="ROLE_ID", referencedColumnName="ID")
-    )
-    private Role role;
+//    @OneToOne(cascade=CascadeType.ALL)
+//    @JoinTable(name="USER_ROLES",
+//        joinColumns = 
+//        @JoinColumn(name="USER_ID", referencedColumnName="ID"),
+//        inverseJoinColumns=
+//          @JoinColumn(name="ROLE_ID", referencedColumnName="ID")
+//    )
+//    private Role role;
  
     public Integer getId() {
         return id;
@@ -54,13 +56,21 @@ public class UserVendor {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public int getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(int vendorId) {
+		this.vendorId = vendorId;
+	}
  
-    public Role getRole() {
-        return role;
-    }
- 
-    public void setRole(Role role) {
-        this.role = role;
-    }   
- 
+//    public Role getRole() {
+//        return role;
+//    }
+// 
+//    public void setRole(Role role) {
+//        this.role = role;
+//    }   
+// 
 }

@@ -16,6 +16,7 @@ import javax.persistence.SqlResultSetMapping;
 import org.springframework.stereotype.Repository;
 
 import com.orderchief.domain.ProductSubOption;
+import com.orderchief.domain.UserVendor;
 import com.orderchief.domain.Vendor;
 
 
@@ -66,6 +67,22 @@ public class VendorDaoImpl implements VendorDao {
 	public Vendor findById(int id) {
 		
 		return em.find(Vendor.class, id);
+	}
+
+
+
+	@Override
+	public UserVendor checkVendor(String userName, String password) {
+		Query query =  em.createQuery("from UserVendor where login=:username and password =:password");
+		query.setParameter("username", userName);
+		query.setParameter("password", password);
+		
+		UserVendor user = (UserVendor) query.getSingleResult();
+		if(user != null){
+			return user;
+		}
+		
+		return null;
 	}
 	
 //	public ProductSubOption getPS(){

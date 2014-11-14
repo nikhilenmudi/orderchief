@@ -8,11 +8,14 @@ import java.util.List;
 
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.orderchief.dao.VendorDao;
+import com.orderchief.domain.UserVendor;
 import com.orderchief.domain.Vendor;
 
 @Service
@@ -38,6 +41,20 @@ public class VendorServiceImpl implements VendorService {
 		}
 
 		return vendors;
+	}
+
+	@Override
+	@Transactional
+	public UserVendor authenticateVendor(String loginKey) {
+		String[] loginInfo = loginKey.split("\\s+");
+		String username = loginInfo[0];
+		String password = loginInfo[1];
+		UserVendor user = this.vendorDao.checkVendor(username, password);
+		boolean loginStatus = false;
+		if(user != null){
+			return user;
+		}
+		return null;
 	}
 
 }

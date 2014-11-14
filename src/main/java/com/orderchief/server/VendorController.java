@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import scala.annotation.meta.param;
+
+import com.orderchief.domain.UserVendor;
 import com.orderchief.domain.Vendor;
 import com.orderchief.service.VendorService;
 
@@ -28,5 +32,14 @@ public class VendorController {
 		return vendors;
 	}
 	
+	@RequestMapping("/login")
+	public @ResponseBody String loginVendor(@RequestParam String loginKey){
+		System.out.println("Login Key is "+loginKey);
+		UserVendor user = this.vendorService.authenticateVendor(loginKey);
+		if(user != null){
+			return Integer.toString(user.getVendorId());
+		}
+		return "FAIL";
+	}
 	
 }

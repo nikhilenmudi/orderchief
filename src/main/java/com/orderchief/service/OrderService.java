@@ -16,4 +16,6 @@ public interface OrderService {
 	
 	public void completeOrder(int completedOrderId);
 	
+	public boolean processPayment(String paymentToken,List<OrderItem> jsonOrders);
+	
 }

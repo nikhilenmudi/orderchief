@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.orderchief.domain.Order;
 import com.orderchief.domain.Vendor;
+import com.orderchief.forms.PaymentForm;
 import com.orderchief.service.OrderService;
 import com.orderchief.util.OrderItem;
 
@@ -89,6 +91,22 @@ public class OrderController {
 		 System.out.println("completing order"+completedOrderId);
 		 this.orderService.completeOrder(completedOrderId);
 		
+		response.setStatus(HttpServletResponse.SC_OK);
+	}
+	
+	@RequestMapping(value = "/processPayment/{complexKey}", method = RequestMethod.POST, headers = "Accept=application/*")
+	public void processPayment(@PathVariable String complexKey, @RequestBody List<OrderItem> jsonOrders, HttpServletResponse response){
+		System.out.println("Received order processing size of "+jsonOrders.size());
+		System.out.println("Token number " + complexKey);
+		String[] paymentInfo = complexKey.split("\\s+");
+		String userGcmKey = paymentInfo[0];
+		String paymentToken = paymentInfo[1];
+		boolean payStatus = this.orderService.processPayment(paymentToken,jsonOrders);
+		System.out.println("The payment was "+payStatus);
+		if(payStatus){
+			System.out.println("Payment Successful -- inserting order!!");
+			this.orderService.saveOrder(userGcmKey, jsonOrders);
+		}
 		response.setStatus(HttpServletResponse.SC_OK);
 	}
 }
